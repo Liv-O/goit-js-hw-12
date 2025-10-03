@@ -16,8 +16,9 @@ let page = 1;
 let perPage = 15;
 
 
-const hanlderSubmit = async function (event) {
+const handlerSubmit = async function (event) {
     event.preventDefault();
+    hideLoadMoreButton();
     page = 1;
     q = event.target.elements['search-text'].value.toLowerCase().trim();
     if (q === '') {
@@ -39,9 +40,8 @@ const hanlderSubmit = async function (event) {
                     
             } else {
                 createGallery(posts);
-                page++;
                 if (page >= totalPages) {
-                    hideLoadMoreButton();
+                    // hideLoadMoreButton();
                     iziToast.warning({
                         message: "We're sorry, but you've reached the end of search results.",
                    });
@@ -60,6 +60,7 @@ const hanlderSubmit = async function (event) {
 };
 
 async function handlerLoad() {
+    page++;
     hideLoadMoreButton();
     showLoader();
     try {
@@ -79,7 +80,6 @@ async function handlerLoad() {
                        top: height,
                        behavior: 'smooth' 
                     });
-                page++;
                 if (page >= totalPages) {
                     hideLoadMoreButton();
                     iziToast.warning({
@@ -100,6 +100,6 @@ async function handlerLoad() {
 }
 
 
-form.addEventListener('submit', hanlderSubmit);
+form.addEventListener('submit', handlerSubmit);
 btn.addEventListener('click', handlerLoad);
 
