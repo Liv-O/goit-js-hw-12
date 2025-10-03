@@ -41,6 +41,7 @@ const hanlderSubmit = async function (event) {
                 createGallery(posts);
                 page++;
                 if (page >= totalPages) {
+                    hideLoadMoreButton();
                     iziToast.warning({
                         message: "We're sorry, but you've reached the end of search results.",
                    });
@@ -58,7 +59,7 @@ const hanlderSubmit = async function (event) {
         
 };
 
-async function handlerLoad(event) {
+async function handlerLoad() {
     hideLoadMoreButton();
     showLoader();
     try {
