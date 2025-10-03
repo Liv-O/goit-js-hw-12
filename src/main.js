@@ -81,6 +81,7 @@ async function handlerLoad() {
                     });
                 page++;
                 if (page >= totalPages) {
+                    hideLoadMoreButton();
                     iziToast.warning({
                         message: "We're sorry, but you've reached the end of search results.",
                    });
